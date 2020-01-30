@@ -1,78 +1,110 @@
 // Business-Logic
 
 function Game() {
-    this.turn = "player1";
-    this.player1Score = 0;
-    this.player2Score = 0;
-    this.points = [2,3,4,5,6];
-    this.tempScore = 0; 
+    this.activePlayer = "x";
+    this.boardSquares = [];
 }
 
-function checkRoll(game, roll) {
-    if (game.points.includes(roll)) {
-        game.tempScore += roll;
-        $("#running-total").html(game.tempScore);
-    } else {
-        nextTurn(game);
-    }
+function Square(div, value) {
+    this.div = div;
+    this.value = value;
 }
 
-function nextTurn(game, tempScore) {
-    if (game.turn === "player1") {
-        if (tempScore) {
-            game.player1Score += tempScore;
-            $("#player1-score").html(game.player1Score);
-        }
-        game.turn = "player2";
-        $("#player2-panel").css("background-color", "lightblue");
-        $("#player1-panel").css("background-color", "whitesmoke");
-    } else {
-        if (tempScore) {
-            game.player2Score += tempScore;
-            $("#player2-score").html(game.player2Score);
-        }
-        game.turn = "player1";
-        $("#player1-panel").css("background-color", "lightblue");
-        $("#player2-panel").css("background-color", "whitesmoke");
-    } 
-    game.tempScore = 0;
-    $("#running-total").html(game.tempScore);
+// Assign Square to Game
+Game.prototype.addSquare = function(game, div) {
+    var value = game.activePlayer;
+    var square = new Square(div, value);
+    this.boardSquares.push(square);
+    console.log(game);
 }
 
-function checkWinner(game) {
-    if (game.player1Score >= 20 || game.player2Score >=20) {
-        alert(game.turn + " has won the game!");
-        newGame();
-    }
+// Apply Mark
+    // print X in selected div ID
+    // assign X to div ID in JSON object
+Game.prototype.applyMark = function(game) {
+    var div = game.boardSquares[0].div;
+    var value = game.boardSquares[0].value;
+    console.log(div);
+    $("#" + div).html(value);
 }
 
-function newGame(){
-    var game = new Game;
-        $("#running-total").html("0");
-        $("#player1-score").html("0");
-        $("#player2-score").html("0");
-        $("#roll-result").html("0");
-        $("#player1-panel").css("background-color", "lightblue");
-}
+// checkForWinner
+    // check for like values existing in winning combinations
+    // if all boxes are filled with no winning combinations, game is over
+
+// nextTurn
+    // if x, update to o
+    // vice versa
+    // ternary operator js?
+
+// function checkRoll(game, roll) {
+//     if (game.points.includes(roll)) {
+//         game.tempScore += roll;
+//         $("#running-total").html(game.tempScore);
+//     } else {
+//         nextTurn(game);
+//     }
+// }
+
+// function nextTurn(game, tempScore) {
+//     if (game.turn === "player1") {
+//         if (tempScore) {
+//             game.player1Score += tempScore;
+//             $("#player1-score").html(game.player1Score);
+//         }
+//         game.turn = "player2";
+//         $("#player2-panel").css("background-color", "lightblue");
+//         $("#player1-panel").css("background-color", "whitesmoke");
+//     } else {
+//         if (tempScore) {
+//             game.player2Score += tempScore;
+//             $("#player2-score").html(game.player2Score);
+//         }
+//         game.turn = "player1";
+//         $("#player1-panel").css("background-color", "lightblue");
+//         $("#player2-panel").css("background-color", "whitesmoke");
+//     } 
+//     game.tempScore = 0;
+//     $("#running-total").html(game.tempScore);
+// }
+
+// function checkWinner(game) {
+//     if (game.player1Score >= 20 || game.player2Score >=20) {
+//         alert(game.turn + " has won the game!");
+//         newGame();
+//     }
+// }
+
+// function newGame(){
+//     var game = new Game;
+//         $("#running-total").html("0");
+//         $("#player1-score").html("0");
+//         $("#player2-score").html("0");
+//         $("#roll-result").html("0");
+//         $("#player1-panel").css("background-color", "lightblue");
+// }
 
 //User-Logic
 
 $(document).ready(function(){
+    //var square = new Square();
     var game = new Game();
-    $("#player1-panel").css("background-color", "lightblue");
-    $("#roll").click(function() {
-        var die = Math.floor((Math.random() *6) +1);
-        $("#roll-result").html(die);
-        checkRoll (game, die);
-    });
-    $("#hold").click(function() {
-        checkWinner(game);
-        nextTurn(game, game.tempScore);
-    });
-    $("#new-game").click(function() {
-        newGame();
-    });
-    $("#instructions").click(function() {
-        alert("Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to \"hold\": If the player rolls a 1, they score nothing and it becomes the next player's turn. If the player rolls any other number, it is added to their turn total and the player's turn continues. If a player chooses to \"hold\", their turn total is added to their score, and it becomes the next player's turn. The first player to score 100 or more points wins.");
+    // assign Square to Game
+
+    // $("#player1-panel").css("background-color", "lightblue");
+     $(".game-board").click(function() {
+        var div = event.target.id;
+        game.addSquare(game, div);
+        game.applyMark(game);
+
+        //checkforWinner()
+        //changeActivePlayer()
+
+    // $("#new-game").click(function() {
+        // alert("X starts first!");
+    //     newGame();
+    // });
+    // $("#instructions").click(function() {
+    //     alert("");
     });
 });

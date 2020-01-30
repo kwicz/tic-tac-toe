@@ -1,19 +1,19 @@
-# _Pig Dice_
+# _Tic Tac Toe_
 
-#### _A 2 Player Dice Game, Jan 2020_
+#### _A 2 Player Board Game, Jan 2020_
 
 #### By _**kwicz && Benjamin Thom**_
 
 
 ## Preview
 
-![Landing Page Preview](pig-dice.png)
+![Landing Page Preview](tic-tac-toe.png)
 
-**[View Live Preview](https://kwicz.github.io/pig-dice/)**
+**[View Live Preview](https://kwicz.github.io/tic-tac-toe)**
 
 ## Description
 
-_{This is a detailed description of your application. Its purpose and usage.  Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. }_
+_This is an online recreation of the classic board game, Tic Tac Toe.  In this game, players must alternate selecting a box in a grid, filling it with either X or O, respectively.  The first player to fill 3 boxes in a row with an X or an O is the winner._
 
 ## Project Specifications
 
@@ -37,18 +37,18 @@ _In Terminal:_
 * Navigate to where you want this application to be saved, i.e.:
 ```cd desktop```
 * Clone the file from GitHub with HTTPS
-```git clone https://github.com/kwicz/pig-dice.git```
+```git clone https://github.com/kwicz/tic-tac-toe.git```
 * Open file in your preferred text editor
-* On Mac: ```open -a {your text editor} pig-dice```
-* On Windows: ```pig-dice```
+* On Mac: ```open -a {your text editor} tic-tac-toe```
+* On Windows: ```tic-tac-toe```
 
 _To Download Manually:_
 
-* Navigate to https://github.com/kwicz/pig-dice.
+* Navigate to https://github.com/kwicz/tic-tac-toe.
 * Click green "Clone or Download" button.
 * Click "Download ZIP".
 * Click downloaded file to unzip.
-* Open folder called "pig-dice".
+* Open folder called "tic-tac-toe".
 * Right click "index.html" and select your preferred browser or text editor.
 
 ## Known Bugs
@@ -57,7 +57,7 @@ _No known bugs at this time._
 
 ## Support and contact details
 
-_Have a bug or an issue with this application? [Open a new issue](https://github.com/kwicz/pig-dice/issues) here on GitHub._
+_Have a bug or an issue with this application? [Open a new issue](https://github.com/kwicz/tic-tac-toe/issues) here on GitHub._
 
 ## Technologies Used
 
