@@ -1,7 +1,7 @@
 // Business-Logic
 
 function Game() {
-    this.activePlayer = "x";
+    this.activePlayer = "X";
     this.boardSquares = [];
 }
 
@@ -11,31 +11,56 @@ function Square(div, value) {
 }
 
 // Assign Square to Game
-Game.prototype.addSquare = function(game, div) {
+Game.prototype.addSquare = function (game, div) {
     var value = game.activePlayer;
     var square = new Square(div, value);
     this.boardSquares.push(square);
-    console.log(game);
 }
 
 // Apply Mark
-    // print X in selected div ID
-    // assign X to div ID in JSON object
-Game.prototype.applyMark = function(game) {
-    var div = game.boardSquares[0].div;
-    var value = game.boardSquares[0].value;
-    console.log(div);
+// print X in selected div ID
+// assign X to div ID in JSON object
+Game.prototype.applyMark = function (game) {
+    var element = game.boardSquares.length - 1;
+    var div = game.boardSquares[element].div;
+    var value = game.boardSquares[element].value;
     $("#" + div).html(value);
+
 }
 
 // checkForWinner
-    // check for like values existing in winning combinations
-    // if all boxes are filled with no winning combinations, game is over
+// check for like values existing in winning combinations
+// if all boxes are filled with no winning combinations, game is over
+Game.prototype.checkForWinner = function (game) {
+
+
+//     winningArrays = [["sq0", "sq1", "sq2"], ["sq0", "sq3", "sq6"], ["sq0", "sq4", "sq8"], ["sq1", "sq4", "sq7"], ["sq2", "sq5", "sq8"], ["sq2", "sq4", "sq7"], ["sq3", "sq4", "sq5"], ["sq6", "sq7", "sq8"]];
+//     var element = game.boardSquares.length - 1;
+//     var div = game.boardSquares[element].div;
+//     var value = game.boardSquares[element].value;
+//     console.log("game: " + game)
+//     winningArrays.forEach(function (winningArray) {
+//         if (winningArray.includes(div)) {
+//             console.log("winning array: " + winningArray)
+//             if (winningArray[0] == winningArray[1] && winningArray[0] == winningArray[2]) {
+//                 var winner = game.activePlayer;
+//                 alert(winner);
+//             }
+//         };
+//     });
+// }
 
 // nextTurn
-    // if x, update to o
-    // vice versa
-    // ternary operator js?
+// if x, update to o
+// vice versa
+// ternary operator js?
+Game.prototype.nextTurn = function (game) {
+    if (game.activePlayer === "X") {
+        game.activePlayer = "O";
+    } else {
+        game.activePlayer = "X";
+    }
+}
 
 // function checkRoll(game, roll) {
 //     if (game.points.includes(roll)) {
@@ -86,25 +111,29 @@ Game.prototype.applyMark = function(game) {
 
 //User-Logic
 
-$(document).ready(function(){
+$(document).ready(function () {
     //var square = new Square();
     var game = new Game();
     // assign Square to Game
 
     // $("#player1-panel").css("background-color", "lightblue");
-     $(".game-board").click(function() {
+    $(".game-board").click(function () {
         var div = event.target.id;
         game.addSquare(game, div);
         game.applyMark(game);
+        game.checkForWinner(game, div);
+        game.nextTurn(game);
+
+        console.log(game);
 
         //checkforWinner()
         //changeActivePlayer()
 
-    // $("#new-game").click(function() {
+        // $("#new-game").click(function() {
         // alert("X starts first!");
-    //     newGame();
-    // });
-    // $("#instructions").click(function() {
-    //     alert("");
+        //     newGame();
+        // });
+        // $("#instructions").click(function() {
+        //     alert("");
     });
 });
