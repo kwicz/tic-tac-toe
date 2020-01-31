@@ -16,7 +16,11 @@ function Square(div, value) {
 Game.prototype.addSquare = function(game, div) {
     var value = game.activePlayer;
     var square = new Square(div, value);
-    this.boardSquares.push(square);
+    console.log("game before push: " + game);
+    if (square.div != ""){
+      game.boardSquares.push(square);
+      console.log("game after push: " + game);
+    }
 }
 
 // Apply user's mark on html page
@@ -53,7 +57,7 @@ Game.prototype.checkForWinner = function(game) {
             winningArrayValue[i] = game.boardSquares[j].value;
             // If all values of WinningArrayValue are the same, we have a winner!
             if (winningArrayValue[0] === winningArrayValue[1] && winningArrayValue[0] === winningArrayValue[2]){
-              alert(activePlayer + "is the winner!");
+              alert(activePlayer + " is the winner!");
             }
           }
         }
