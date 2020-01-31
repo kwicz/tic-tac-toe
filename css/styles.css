@@ -13,8 +13,6 @@ body {
 }
 
 .square {
-    border-color: solid black;
-    border-width: 3px;
     background-color: whitesmoke;
     height: 200px;
     width: 100%;
