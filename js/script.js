@@ -43,18 +43,15 @@ Game.prototype.checkForWinner = function(game) {
   winningArrays.forEach(function(winningArray) {
     // Narrow down which winning arrays to check
     if (winningArray.includes(div)) {
-      console.log("winningArray: " + winningArray);
-      // Cycle through each item in the array
+      // Cycle through each item in the active winning array
       for(i = 0; i < winningArray.length; i++){
-        console.log("length of winning array: " + winningArray.length);
-        // Find div string match in game
+        // Find div in game that matches div in active winning array
         for (j = 0; j < game.boardSquares.length; j++) {
-          console.log("length of board squares: " + game.boardSquares.length);
-          // If array square matches a game square
+          // If winning array square matches a game square
           if (winningArray[i] === game.boardSquares[j].div) {
             // Hold value of game square in an array to check against
             winningArrayValue[i] = game.boardSquares[j].value;
-            console.log("winningArrayValue: " + winningArrayValue);
+            // If all values of WinningArrayValue are the same, we have a winner!
             if (winningArrayValue[0] === winningArrayValue[1] && winningArrayValue[0] === winningArrayValue[2]){
               alert(activePlayer + "is the winner!");
             }
@@ -82,7 +79,6 @@ function newGame(){
 }
 
 //User-Logic
-
 $(document).ready(function() {
   
   // Start new game
