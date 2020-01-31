@@ -19,15 +19,14 @@ _This is an online recreation of the classic board game, Tic Tac Toe.  In this g
 
 | Behavior | Input | Output |
 |---|:---:|:---:|
-|User clicks "roll"|"roll"|1-6 returned|
-|User recieves number|1|No score added|
+|User hovers over a section of the board|cursor hover|highlight section|
+|Player 1 selects spot on game board|click|X marks the spot|
 |   |   |Next player's turn|
-|   |2 - 6|Score tallied|
-|User clicks "hold"|"hold"|Tallied score prints|
+|Player 2 selects spot on game board|click|O marks the spot|
 |   |   |Next player's turn|
-|Tallied score reaches 100| |User with score 100 wins game|
-|   |   |Game ends|
-|   |   |Game resets|
+|Player reaches 3 marks in a row|click|alert winnner|
+|User restarts a game|click New Game button|Game resets|
+
 
 
 ## Setup/Installation Requirements
