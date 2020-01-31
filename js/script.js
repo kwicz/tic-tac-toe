@@ -10,6 +10,24 @@ function Square(div, value) {
     this.value = value;
 }
 
+function Values() {
+    this.sq0 = sq0;
+    this.sq1 = sq1;
+    this.sq2 = sq2;
+    this.sq3 = sq3;
+    this.sq4 = sq4;
+    this.sq5 = sq5;
+    this.sq6 = sq6;
+    this.sq7 = sq7;
+    this.sq8 = sq8;
+}
+
+// Assign Values to Squares
+Values.prototype.addValue = function(values, div){
+    values.div = div;
+    console.log("values div: " + values.sq0);
+}
+
 // Assign Square to Game
 Game.prototype.addSquare = function (game, div) {
     var value = game.activePlayer;
@@ -31,7 +49,7 @@ Game.prototype.applyMark = function (game) {
 // checkForWinner
 // check for like values existing in winning combinations
 // if all boxes are filled with no winning combinations, game is over
-Game.prototype.checkForWinner = function (game) {
+Game.prototype.checkForWinner = function (game) {};
 
 
 //     winningArrays = [["sq0", "sq1", "sq2"], ["sq0", "sq3", "sq6"], ["sq0", "sq4", "sq8"], ["sq1", "sq4", "sq7"], ["sq2", "sq5", "sq8"], ["sq2", "sq4", "sq7"], ["sq3", "sq4", "sq5"], ["sq6", "sq7", "sq8"]];
@@ -50,10 +68,7 @@ Game.prototype.checkForWinner = function (game) {
 //     });
 // }
 
-// nextTurn
-// if x, update to o
-// vice versa
-// ternary operator js?
+// Game moves turn to next Player
 Game.prototype.nextTurn = function (game) {
     if (game.activePlayer === "X") {
         game.activePlayer = "O";
@@ -61,44 +76,6 @@ Game.prototype.nextTurn = function (game) {
         game.activePlayer = "X";
     }
 }
-
-// function checkRoll(game, roll) {
-//     if (game.points.includes(roll)) {
-//         game.tempScore += roll;
-//         $("#running-total").html(game.tempScore);
-//     } else {
-//         nextTurn(game);
-//     }
-// }
-
-// function nextTurn(game, tempScore) {
-//     if (game.turn === "player1") {
-//         if (tempScore) {
-//             game.player1Score += tempScore;
-//             $("#player1-score").html(game.player1Score);
-//         }
-//         game.turn = "player2";
-//         $("#player2-panel").css("background-color", "lightblue");
-//         $("#player1-panel").css("background-color", "whitesmoke");
-//     } else {
-//         if (tempScore) {
-//             game.player2Score += tempScore;
-//             $("#player2-score").html(game.player2Score);
-//         }
-//         game.turn = "player1";
-//         $("#player1-panel").css("background-color", "lightblue");
-//         $("#player2-panel").css("background-color", "whitesmoke");
-//     } 
-//     game.tempScore = 0;
-//     $("#running-total").html(game.tempScore);
-// }
-
-// function checkWinner(game) {
-//     if (game.player1Score >= 20 || game.player2Score >=20) {
-//         alert(game.turn + " has won the game!");
-//         newGame();
-//     }
-// }
 
 // function newGame(){
 //     var game = new Game;
@@ -111,14 +88,23 @@ Game.prototype.nextTurn = function (game) {
 
 //User-Logic
 
-$(document).ready(function () {
+$(document).ready(function() {
     //var square = new Square();
     var game = new Game();
+    var values = new Values();
     // assign Square to Game
+    $(".square").hover(function() {
+        var div = event.target.id;
+        $("#" + div).css("background-color", "lightblue");
+    } , function() {
+        var div = event.target.id;
+        $("#" + div).css("background-color", "whitesmoke");
+    })
 
     // $("#player1-panel").css("background-color", "lightblue");
-    $(".game-board").click(function () {
+    $(".game-board").click(function() {
         var div = event.target.id;
+        values.addValue(values, div);
         game.addSquare(game, div);
         game.applyMark(game);
         game.checkForWinner(game, div);
@@ -126,14 +112,9 @@ $(document).ready(function () {
 
         console.log(game);
 
-        //checkforWinner()
-        //changeActivePlayer()
-
         // $("#new-game").click(function() {
         // alert("X starts first!");
-        //     newGame();
+        //      newGame();
         // });
-        // $("#instructions").click(function() {
-        //     alert("");
     });
 });
