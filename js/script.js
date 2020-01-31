@@ -27,65 +27,43 @@ Game.prototype.applyMark = function(game) {
     $("#" + div).html(value);
 }
 
-// // checkForWinner
-// Game.prototype.checkForWinner = function(game) {
+// checkForWinner
+Game.prototype.checkForWinner = function(game) {
 
-//   // Establish winning array combinations
-//   winningArrays = [["sq0", "sq1", "sq2"], ["sq0", "sq3", "sq6"], ["sq0", "sq4", "sq8"], ["sq1", "sq4", "sq7"], ["sq2", "sq5", "sq8"], ["sq2", "sq4", "sq7"], ["sq3", "sq4", "sq5"], ["sq6", "sq7", "sq8"]];
+  // Establish winning array combinations
+  winningArrays = [["sq0", "sq1", "sq2"], ["sq0", "sq3", "sq6"], ["sq0", "sq4", "sq8"], ["sq1", "sq4", "sq7"], ["sq2", "sq5", "sq8"], ["sq2", "sq4", "sq7"], ["sq3", "sq4", "sq5"], ["sq6", "sq7", "sq8"]];
   
-//   // Declare variables passed in from game
-//   var activePlayer = game.activePlayer;
-//   var element = game.boardSquares.length - 1;
-//   var div = game.boardSquares[element].div;
-//   var value = game.boardSquares[element].value;
-//   var winningArrayValue = [];
-//   var potentialWinningCombos = [];
-
-
-
+  // Declare variables passed in from game
+  var activePlayer = game.activePlayer;
+  var element = game.boardSquares.length - 1;
+  var div = game.boardSquares[element].div;
+  var winningArrayValue = [];
   
-//   // Cycle through each potential winning array
-//   winningArrays.forEach(function(winningArray) {
-//     // Narrow down which winning arrays to check
-//     if (winningArray.includes(div)) {
-//       potentialWinningCombos.push(winningArray);
-//     }
-
-//     // For each array in PWC
-//     potentialWinningCombos.foreach(potentialWC) {
-//       // Look in every entered move in game
-//       for (i = 0; i < game.boardSquares.length; i++) {
-//         // Check for squares previously marked by Active Player
-//         if (game.boardSquares[i].value === activePlayer) {
-          
-//         }
-//         for(x = 0; x < winningArray.length; x++) {
-
-//         }
-//       }
-//     }
-
-
-
-      // Cycle through all the gameboard squares to find the current square clicked
-      for (i = 0; i < game.boardSquares.length; i++) {
-        for(x = 0; x < winningArray.length; x++) {
-          if (winningArray[x] === div) {
-            // Get the value from the current square clicked
-            console.log("x: " + x);
-            winningArrayValue[x] = game.boardSquares[i].value;
+  // Cycle through each potential winning array
+  winningArrays.forEach(function(winningArray) {
+    // Narrow down which winning arrays to check
+    if (winningArray.includes(div)) {
+      console.log("winningArray: " + winningArray);
+      // Cycle through each item in the array
+      for(i = 0; i < winningArray.length; i++){
+        console.log("length of winning array: " + winningArray.length);
+        // Find div string match in game
+        for (j = 0; j < game.boardSquares.length; j++) {
+          console.log("length of board squares: " + game.boardSquares.length);
+          // If array square matches a game square
+          if (winningArray[i] === game.boardSquares[j].div) {
+            // Hold value of game square in an array to check against
+            winningArrayValue[i] = game.boardSquares[j].value;
             console.log("winningArrayValue: " + winningArrayValue);
-            console.log("winningArray[x]: " + winningArray[x]);
-            if (winningArrayValue[0] === value && winningArrayValue[1] === value && winningArrayValue[2] === value) {
-              var winner = game.activePlayer;
-              alert(winner);
+            if (winningArrayValue[0] === winningArrayValue[1] && winningArrayValue[0] === winningArrayValue[2]){
+              alert(activePlayer + "is the winner!");
             }
           }
-        }  
+        }
       }
-    };
+    }
   });
-}
+};
 
 // Game moves turn to next Player
 Game.prototype.nextTurn = function(game) {
